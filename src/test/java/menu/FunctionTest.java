@@ -11,7 +11,6 @@ import menu.model.lunch.Menu;
 import menu.model.lunch.Weekday;
 import menu.model.recommendation.Coach;
 import menu.model.recommendation.RecommendedCategories;
-import menu.model.recommendation.RecommendedMenus;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 import menu.repository.RecommendationRepository;

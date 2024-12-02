@@ -14,7 +14,8 @@ import menu.model.lunch.Weekday;
 public class OutputView {
     private static final String JOINING_DELIMITER = " | ";
 
-    public void printRecommendationResult(RecommendedCategories recommendedCategories, List<Coach> coaches, Map<Coach, RecommendedMenus> recommendationResult) {
+    public void printRecommendationResult(RecommendedCategories recommendedCategories, List<Coach> coaches,
+                                          Map<Coach, RecommendedMenus> recommendationResult) {
         printStartLine();
         printWeekdays();
         printRecommendedCategories(recommendedCategories);
