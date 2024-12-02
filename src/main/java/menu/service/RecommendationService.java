@@ -57,25 +57,36 @@ public class RecommendationService {
 
     //TODO: dto로 바꾸기
     public Map<Coach, RecommendedMenus> recommendMenus(RecommendedCategories recommendedCategories) {
-        for (Coach coach : coachRepository.findAll()) {
-            Map<Weekday, Menu> recommendedMenus = new HashMap<>();
-            for (Weekday weekday : Weekday.getAllInOrder()) {
-                recommendMenuPerDayPerCoach(weekday, coach, recommendedMenus,
+        Map<Coach, RecommendedMenus> recommendationResult = initializeResult();
+        for (Weekday weekday : Weekday.getAllInOrder()) {
+            for (Coach coach : coachRepository.findAll()) {
+                RecommendedMenus recommendationMiddleResult = recommendationResult.get(coach);
+                recommendMenuPerDayPerCoach(weekday, coach, recommendationMiddleResult,
                         recommendedCategories.findByWeekday(weekday));
             }
-            recommendationRepository.save(coach, new RecommendedMenus(recommendedMenus));
+        }
+        for (Coach coach : coachRepository.findAll()) {
+            recommendationRepository.save(coach, recommendationResult.get(coach));
         }
         return recommendationRepository.findAll();
     }
 
-    private void recommendMenuPerDayPerCoach(Weekday weekday, Coach coach, Map<Weekday, Menu> recommendedMenus,
+    private Map<Coach, RecommendedMenus> initializeResult() {
+        Map<Coach, RecommendedMenus> recommendationResult = new HashMap<>();
+        for (Coach coach : coachRepository.findAll()) {
+            recommendationResult.put(coach, new RecommendedMenus());
+        }
+        return recommendationResult;
+    }
+
+    private void recommendMenuPerDayPerCoach(Weekday weekday, Coach coach, RecommendedMenus recommendedMenus,
                                              Category category) {
         while (true) {
             try {
                 Menu randomMenu = menuRepository.findByName(
                         Randoms.shuffle(menuRepository.findNamesByCategory(category)).get(0));
                 validateMenuAvailability(randomMenu, coach, recommendedMenus);
-                recommendedMenus.put(weekday, randomMenu);
+                recommendedMenus.update(weekday, randomMenu);
                 return;
             } catch (ForbiddenMenuException | DuplicatedMenuException exception) {
             } catch (OutOfMemoryError error) {
@@ -84,11 +95,11 @@ public class RecommendationService {
         }
     }
 
-    private void validateMenuAvailability(Menu randomMenu, Coach coach, Map<Weekday, Menu> recommendedMenus) {
+    private void validateMenuAvailability(Menu randomMenu, Coach coach, RecommendedMenus recommendedMenus) {
         if (coach.containsForbiddenMenu(randomMenu)) {
             throw new ForbiddenMenuException();
         }
-        if (recommendedMenus.values().contains(randomMenu)) {
+        if (recommendedMenus.containsMenu(randomMenu)) {
             throw new DuplicatedMenuException();
         }
     }
