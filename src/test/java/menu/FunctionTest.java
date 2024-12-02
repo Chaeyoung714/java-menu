@@ -2,7 +2,12 @@ package menu;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import menu.model.lunch.Category;
+import menu.model.lunch.Weekday;
 import menu.model.recommendation.Coach;
 import menu.model.recommendation.RecommendedCategories;
 import menu.repository.CoachRepository;
@@ -52,7 +57,7 @@ public class FunctionTest {
     }
 
     @Test
-    void 메뉴_추천_테스트() {
+    void 카테고리_및_메뉴_추천_테스트() {
         Coach poby = coachRepository.findByName("포비");
         Coach roro = coachRepository.findByName("로로");
         RecommendedCategories recommendedCategories = categoryService.recommendCategories();

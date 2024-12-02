@@ -1,13 +1,17 @@
 package menu.service;
 
+import static menu.exception.ExceptionMessages.MENU_NOT_EXIST;
 import static menu.exception.ExceptionMessages.RECOMMEND_SYSTEM_FAIL;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.DuplicatedMenuException;
 import menu.exception.customExceptions.ForbiddenMenuException;
+import menu.exception.customExceptions.MenuNotExistsException;
 import menu.model.recommendation.Coach;
 import menu.model.recommendation.RecommendedCategories;
 import menu.model.recommendation.RecommendedMenus;

@@ -4,7 +4,6 @@ import static menu.exception.ExceptionMessages.MENU_NOT_EXIST;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.MenuNotExistsException;
 import menu.model.recommendation.Coach;
 import menu.model.lunch.Menu;
@@ -20,13 +19,6 @@ public class CoachService {
         this.menuRepository = menuRepository;
     }
 
-    public List<Coach> registerCoaches(List<String> coachesInput) {
-        for (String name : coachesInput) {
-            coachRepository.save(new Coach(name));
-        }
-        return coachRepository.findAll();
-    }
-
     public void registerForbiddenMenuName(Coach coach, List<String> forbiddenMenuNames) {
         try {
             List<Menu> forbiddenMenus = forbiddenMenuNames.stream()
@@ -36,5 +28,12 @@ public class CoachService {
         } catch (MenuNotExistsException e) {
             throw new IllegalArgumentException(MENU_NOT_EXIST.getMessage());
         }
+    }
+
+    public List<Coach> registerCoaches(List<String> coachesInput) {
+        for (String name : coachesInput) {
+            coachRepository.save(new Coach(name));
+        }
+        return coachRepository.findAll();
     }
 }

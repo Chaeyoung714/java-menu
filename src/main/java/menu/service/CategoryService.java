@@ -5,7 +5,6 @@ import static menu.exception.ExceptionMessages.RECOMMEND_SYSTEM_FAIL;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.DuplicatedCategoryException;
 import menu.model.lunch.Category;
 import menu.model.lunch.Weekday;
