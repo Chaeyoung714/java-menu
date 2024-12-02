@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.List;
 import menu.model.coach.Coach;
+import menu.model.coach.RecommendedCategories;
 import menu.service.CoachService;
 import menu.service.RecommendationService;
 import menu.view.InputHandler;
@@ -28,7 +29,7 @@ public class MenuController {
             List<String> forbiddenMenuNames = inputHandler.inputForbiddenMenuNames(coach.getName());
             coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
         }
-        recommendationService.recommendCategories();
-        recommendationService.recommendMenus();
+        RecommendedCategories categories = recommendationService.recommendCategories();
+        recommendationService.recommendMenus(categories);
     }
 }

@@ -1,5 +1,7 @@
 package menu.model.lunch;
 
+import java.util.List;
+
 public enum Weekday {
     MONDAY("월요일"),
     TUESDAY("화요일"),
@@ -12,5 +14,13 @@ public enum Weekday {
 
     Weekday(String name) {
         this.name = name;
+    }
+
+    public static List<Weekday> getAllInOrder() {
+        return List.of(Weekday.values());
+    }
+
+    public String getName() {
+        return name;
     }
 }

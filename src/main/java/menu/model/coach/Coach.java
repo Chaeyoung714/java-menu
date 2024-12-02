@@ -14,15 +14,19 @@ public class Coach {
         this.forbiddenMenus = new ArrayList<>();
     }
 
+    public void setForbiddenMenuNames(List<Menu> forbiddenMenus) {
+        this.forbiddenMenus.addAll(forbiddenMenus);
+    }
+
+    public boolean containsForbiddenMenu(Menu randomMenu) {
+        return forbiddenMenus.contains(randomMenu);
+    }
+
     public String getName() {
         return name;
     }
 
     public List<Menu> getForbiddenMenus() {
         return Collections.unmodifiableList(forbiddenMenus);
-    }
-
-    public void setForbiddenMenuNames(List<Menu> forbiddenMenus) {
-        this.forbiddenMenus.addAll(forbiddenMenus);
     }
 }

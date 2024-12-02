@@ -1,6 +1,7 @@
 package menu.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InputView {
@@ -16,6 +17,9 @@ public class InputView {
         System.out.println(System.lineSeparator() + String.format("%s(이)가 못 먹는 메뉴를 입력해 주세요.", coachName));
         String answer = Console.readLine();
         //TODO : 검증로직 추가
+        if (answer == null || answer.isBlank()) {
+            return new ArrayList<>();
+        }
         return List.of(answer.split(","));
     }
 }

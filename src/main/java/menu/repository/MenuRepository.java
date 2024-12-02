@@ -3,6 +3,7 @@ package menu.repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import menu.model.lunch.Category;
 import menu.model.lunch.Menu;
 import menu.util.MenuScanner;
@@ -33,5 +34,12 @@ public class MenuRepository {
                 .filter(m -> m.getName().equals(name))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
+    }
+
+    public List<String> findNamesByCategory(Category category) {
+        return menus.stream()
+                .filter(m -> m.getCategory().equals(category))
+                .map(m -> m.getName())
+                .collect(Collectors.toList());
     }
 }
