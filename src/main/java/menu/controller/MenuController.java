@@ -3,6 +3,7 @@ package menu.controller;
 import java.util.List;
 import menu.model.coach.Coach;
 import menu.service.CoachService;
+import menu.service.RecommendationService;
 import menu.view.InputHandler;
 import menu.view.OutputView;
 
@@ -10,11 +11,14 @@ public class MenuController {
     private final InputHandler inputHandler;
     private final OutputView outputView;
     private final CoachService coachService;
+    private final RecommendationService recommendationService;
 
-    public MenuController(InputHandler inputHandler, OutputView outputView, CoachService coachService) {
+    public MenuController(InputHandler inputHandler, OutputView outputView, CoachService coachService,
+                          RecommendationService recommendationService) {
         this.inputHandler = inputHandler;
         this.outputView = outputView;
         this.coachService = coachService;
+        this.recommendationService = recommendationService;
     }
 
     public void run() {
@@ -24,6 +28,7 @@ public class MenuController {
             List<String> forbiddenMenuNames = inputHandler.inputForbiddenMenuNames(coach.getName());
             coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
         }
-
+        recommendationService.recommendCategories();
+        recommendationService.recommendMenus();
     }
 }

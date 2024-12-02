@@ -3,7 +3,7 @@ package menu.model.coach;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import menu.model.menu.Menu;
+import menu.model.lunch.Menu;
 
 public class Coach {
     private final String name;

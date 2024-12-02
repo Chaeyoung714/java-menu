@@ -2,8 +2,8 @@ package menu.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import menu.model.menu.Category;
-import menu.model.menu.Menu;
+import menu.model.lunch.Category;
+import menu.model.lunch.Menu;
 
 public class MenuScanner {
 

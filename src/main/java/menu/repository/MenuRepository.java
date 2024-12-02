@@ -3,8 +3,8 @@ package menu.repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import menu.model.menu.Category;
-import menu.model.menu.Menu;
+import menu.model.lunch.Category;
+import menu.model.lunch.Menu;
 import menu.util.MenuScanner;
 
 public class MenuRepository {

@@ -42,16 +42,16 @@
 ## 3. 일별 추천 카테고리를 결정한다.
 
 1. 일별(월~금요일)로 각각 카테고리를 랜덤 결정한다.
-    - [ ]  이때, 아래의 경우 해당 일자의 카테고리를 다시 뽑는다.
-        - [ ]  중복된 카테고리가 합쳐서 2개를 초과한 경우
-    - [ ]  추천할 카테고리는 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.pickNumberInRange()`에서 생성해 준 값을 이용하여 정해야 한다.
-        - [ ]  `Randoms.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
-        - [ ]  추천할 수 없는 카테고리인 경우 다시 `Randoms.pickNumberInRange()`를 통해 임의의 값을 생성해서 추천할 카테고리를 정해야 한다.
+    - [x]  이때, 아래의 경우 해당 일자의 카테고리를 다시 뽑는다.
+        - [x]  중복된 카테고리가 합쳐서 2개를 초과한 경우
+    - [x]  추천할 카테고리는 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.pickNumberInRange()`에서 생성해 준 값을 이용하여 정해야 한다.
+        - [x]  `Randoms.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
+        - [x]  추천할 수 없는 카테고리인 경우 다시 `Randoms.pickNumberInRange()`를 통해 임의의 값을 생성해서 추천할 카테고리를 정해야 한다.
 2. 일별 추천 카테고리를 저장한다.
 
 ## 4. 코치별 일별 추천 메뉴를 결정한다.
 
-1. 모든 코치들에 대해 한명씩
+1. 모든 코치들에 대해 한명씩 2~3을 반복한다.
 2. 일별(월~금요일)로 각각 카테고리에 맞는 메뉴를 랜덤 결정한다.
     - [ ]  이때, 아래의 경우 해당 일자의 메뉴를 다시 뽑는다.
         - [ ]  해당 코치의 추천메뉴 중 중복된 메뉴가 있을 경우

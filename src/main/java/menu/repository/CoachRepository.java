@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import menu.model.coach.Coach;
-import menu.model.menu.Menu;
 
 public class CoachRepository {
     private final List<Coach> coaches;

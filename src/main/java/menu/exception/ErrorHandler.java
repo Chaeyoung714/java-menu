@@ -6,6 +6,6 @@ public class ErrorHandler {
     }
 
     public static void handleSystemError(Exception e) {
-        System.out.println("[SYSTEM] " + e.getMessage()+ System.lineSeparator());
+        System.out.println("[ERROR][SYSTEM] " + e.getMessage()+ System.lineSeparator());
     }
 }

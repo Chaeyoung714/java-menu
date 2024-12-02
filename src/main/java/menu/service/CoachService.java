@@ -3,7 +3,7 @@ package menu.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.coach.Coach;
-import menu.model.menu.Menu;
+import menu.model.lunch.Menu;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 
