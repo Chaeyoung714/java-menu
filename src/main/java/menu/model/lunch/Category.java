@@ -10,6 +10,9 @@ public enum Category {
     WESTERN("양식", 5),
     ;
 
+    public static final int START_NUMBER = 1;
+    public static final int LAST_NUMBER = 5;
+
     private final String name;
     private final int number;
 

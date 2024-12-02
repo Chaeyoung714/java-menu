@@ -1,7 +1,10 @@
 package menu.service;
 
+import static menu.exception.ExceptionMessages.MENU_NOT_EXIST;
+
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.MenuNotExistsException;
 import menu.model.recommendation.Coach;
 import menu.model.lunch.Menu;
@@ -31,7 +34,7 @@ public class CoachService {
                     .collect(Collectors.toList());
             coach.setForbiddenMenuNames(forbiddenMenus);
         } catch (MenuNotExistsException e) {
-            throw new IllegalArgumentException("존재하지 않는 메뉴입니다. 다시 입력해주세요.");
+            throw new IllegalArgumentException(MENU_NOT_EXIST.getMessage());
         }
     }
 }

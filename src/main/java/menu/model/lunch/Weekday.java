@@ -10,6 +10,8 @@ public enum Weekday {
     FRIDAY("금요일"),
     ;
 
+    public static final int COUNT = 5;
+
     private final String name;
 
     Weekday(String name) {

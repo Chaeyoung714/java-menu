@@ -1,25 +1,31 @@
 package menu.service;
 
+import static menu.exception.ExceptionMessages.RECOMMEND_SYSTEM_FAIL;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.DuplicatedCategoryException;
 import menu.model.lunch.Category;
+import menu.model.lunch.Weekday;
 import menu.model.recommendation.RecommendedCategories;
 
 public class CategoryService {
 
+    private static final int CATEGORY_DUPLICATION_UPPER_LIMIT = 2;
+
     public RecommendedCategories recommendCategories() {
-        List<Category> categories = new ArrayList<>(5);
-        while (categories.size() < 5) {
+        List<Category> categories = new ArrayList<>();
+        while (categories.size() < Weekday.COUNT) {
             try {
-                int number = Randoms.pickNumberInRange(1, 5);
+                int number = Randoms.pickNumberInRange(Category.START_NUMBER, Category.LAST_NUMBER);
                 Category randomCategory = Category.findByNumber(number);
                 validateCategoryAvailability(randomCategory, categories);
                 categories.add(randomCategory);
             } catch (DuplicatedCategoryException e) {
             } catch (OutOfMemoryError error) {
-                throw new IllegalStateException("[ERROR][SYSTEM] 추천에 실패했습니다.");
+                throw new IllegalStateException(RECOMMEND_SYSTEM_FAIL.getMessage());
             }
         }
         return RecommendedCategories.of(categories);
@@ -29,9 +35,8 @@ public class CategoryService {
         long duplicationCount = categories.stream()
                 .filter(c -> c.equals(randomCategory))
                 .count();
-        if (duplicationCount >= 2) {
+        if (duplicationCount >= CATEGORY_DUPLICATION_UPPER_LIMIT) {
             throw new DuplicatedCategoryException();
         }
     }
-
 }

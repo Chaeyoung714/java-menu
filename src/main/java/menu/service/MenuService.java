@@ -1,11 +1,11 @@
 package menu.service;
 
+import static menu.exception.ExceptionMessages.RECOMMEND_SYSTEM_FAIL;
+
 import camp.nextstep.edu.missionutils.Randoms;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import menu.exception.customExceptions.DuplicatedCategoryException;
+import menu.exception.ExceptionMessages;
 import menu.exception.customExceptions.DuplicatedMenuException;
 import menu.exception.customExceptions.ForbiddenMenuException;
 import menu.model.recommendation.Coach;
@@ -64,7 +64,7 @@ public class MenuService {
                 return;
             } catch (ForbiddenMenuException | DuplicatedMenuException exception) {
             } catch (OutOfMemoryError error) {
-                throw new IllegalStateException("[ERROR][SYSTEM] 추천에 실패했습니다.");
+                throw new IllegalStateException(RECOMMEND_SYSTEM_FAIL.getMessage());
             }
         }
     }
