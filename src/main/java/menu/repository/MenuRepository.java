@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.exception.MenuNotExistsException;
 import menu.model.lunch.Category;
 import menu.model.lunch.Menu;
 import menu.util.MenuScanner;
@@ -33,7 +34,7 @@ public class MenuRepository {
         return menus.stream()
                 .filter(m -> m.getName().equals(name))
                 .findFirst()
-                .orElseThrow(IllegalStateException::new);
+                .orElseThrow(MenuNotExistsException::new);
     }
 
     public List<String> findNamesByCategory(Category category) {

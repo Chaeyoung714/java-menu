@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.List;
 import java.util.Map;
+import menu.exception.ErrorHandler;
 import menu.model.coach.Coach;
 import menu.model.coach.RecommendedCategories;
 import menu.model.coach.RecommendedMenus;
@@ -29,11 +30,22 @@ public class MenuController {
         List<String> names = inputHandler.inputNames();
         List<Coach> coaches = coachService.registerCoaches(names);
         for (Coach coach : coaches) {
-            List<String> forbiddenMenuNames = inputHandler.inputForbiddenMenuNames(coach.getName());
-            coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
+            registerForbiddenMenuName(coach);
         }
         RecommendedCategories categories = recommendationService.recommendCategories();
         Map<Coach, RecommendedMenus> recommendationResult = recommendationService.recommendMenus(categories);
         outputView.printRecommendationResult(categories, coaches, recommendationResult);
+    }
+
+    private void registerForbiddenMenuName(Coach coach) {
+        while (true) {
+            try {
+                List<String> forbiddenMenuNames = inputHandler.inputForbiddenMenuNames(coach.getName());
+                coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
+                return;
+            } catch (IllegalArgumentException e) {
+                ErrorHandler.handleUserError(e);
+            }
+        }
     }
 }

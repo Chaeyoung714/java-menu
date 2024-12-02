@@ -2,6 +2,7 @@ package menu.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.exception.MenuNotExistsException;
 import menu.model.coach.Coach;
 import menu.model.lunch.Menu;
 import menu.repository.CoachRepository;
@@ -30,9 +31,8 @@ public class CoachService {
                     .map(mName -> menuRepository.findByName(mName))
                     .collect(Collectors.toList());
             coach.setForbiddenMenuNames(forbiddenMenus);
-        } catch (IllegalStateException e) {
-            //TODO : 해당 에러를 받아서 재입력 처리 필요
-            throw new IllegalArgumentException();
+        } catch (MenuNotExistsException e) {
+            throw new IllegalArgumentException("존재하지 않는 메뉴입니다. 다시 입력해주세요.");
         }
     }
 }
