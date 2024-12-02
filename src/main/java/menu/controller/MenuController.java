@@ -3,10 +3,9 @@ package menu.controller;
 import java.util.List;
 import java.util.Map;
 import menu.exception.ErrorHandler;
-import menu.model.coach.Coach;
-import menu.model.coach.RecommendedCategories;
-import menu.model.coach.RecommendedMenus;
-import menu.model.lunch.Weekday;
+import menu.model.recommendation.Coach;
+import menu.model.recommendation.RecommendedCategories;
+import menu.model.recommendation.RecommendedMenus;
 import menu.service.CoachService;
 import menu.service.RecommendationService;
 import menu.view.InputHandler;
@@ -27,14 +26,22 @@ public class MenuController {
     }
 
     public void run() {
-        List<String> names = inputHandler.inputNames();
-        List<Coach> coaches = coachService.registerCoaches(names);
-        for (Coach coach : coaches) {
-            registerForbiddenMenuName(coach);
-        }
+        List<Coach> coaches = registerCoaches();
+        registerForbiddenMenuNames(coaches);
         RecommendedCategories categories = recommendationService.recommendCategories();
         Map<Coach, RecommendedMenus> recommendationResult = recommendationService.recommendMenus(categories);
         outputView.printRecommendationResult(categories, coaches, recommendationResult);
+    }
+
+    private List<Coach> registerCoaches() {
+        List<String> names = inputHandler.inputNames();
+        return coachService.registerCoaches(names);
+    }
+
+    private void registerForbiddenMenuNames(List<Coach> coaches) {
+        for (Coach coach : coaches) {
+            registerForbiddenMenuName(coach);
+        }
     }
 
     private void registerForbiddenMenuName(Coach coach) {
@@ -48,4 +55,6 @@ public class MenuController {
             }
         }
     }
+
+
 }

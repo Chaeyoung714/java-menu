@@ -2,8 +2,8 @@ package menu.repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import menu.model.coach.Coach;
-import menu.model.coach.RecommendedMenus;
+import menu.model.recommendation.Coach;
+import menu.model.recommendation.RecommendedMenus;
 
 public class RecommendationRepository {
     private final Map<Coach, RecommendedMenus> recommendation;

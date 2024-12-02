@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import menu.model.coach.Coach;
-import menu.model.coach.RecommendedCategories;
-import menu.model.coach.RecommendedMenus;
+import menu.model.recommendation.Coach;
+import menu.model.recommendation.RecommendedCategories;
+import menu.model.recommendation.RecommendedMenus;
 import menu.model.lunch.Menu;
 import menu.model.lunch.Weekday;
 

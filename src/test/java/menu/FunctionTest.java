@@ -2,10 +2,9 @@ package menu;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
-import menu.model.coach.Coach;
-import menu.model.coach.RecommendedCategories;
+import menu.model.recommendation.Coach;
+import menu.model.recommendation.RecommendedCategories;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 import menu.repository.RecommendationRepository;

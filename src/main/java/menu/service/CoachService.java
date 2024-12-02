@@ -2,8 +2,8 @@ package menu.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import menu.exception.MenuNotExistsException;
-import menu.model.coach.Coach;
+import menu.exception.customExceptions.MenuNotExistsException;
+import menu.model.recommendation.Coach;
 import menu.model.lunch.Menu;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import menu.exception.MenuNotExistsException;
+import menu.exception.customExceptions.MenuNotExistsException;
 import menu.model.lunch.Category;
 import menu.model.lunch.Menu;
 import menu.util.MenuScanner;

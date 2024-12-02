@@ -3,7 +3,7 @@ package menu.repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import menu.model.coach.Coach;
+import menu.model.recommendation.Coach;
 
 public class CoachRepository {
     private final List<Coach> coaches;

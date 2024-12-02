@@ -1,4 +1,4 @@
-package menu.model.coach;
+package menu.model.recommendation;
 
 import java.util.HashMap;
 import java.util.List;
