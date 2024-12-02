@@ -7,9 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import menu.model.lunch.Category;
+import menu.model.lunch.Menu;
 import menu.model.lunch.Weekday;
 import menu.model.recommendation.Coach;
 import menu.model.recommendation.RecommendedCategories;
+import menu.model.recommendation.RecommendedMenus;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 import menu.repository.RecommendationRepository;
@@ -67,6 +69,47 @@ public class FunctionTest {
         assertThat(recommendationRepository.findAll().size()).isEqualTo(2);
         assertThat(recommendationRepository.findAll().get(poby).getMenus().size()).isEqualTo(5);
         assertThat(recommendationRepository.findAll().get(roro).getMenus().size()).isEqualTo(5);
+    }
+
+    @Test
+    void 한_주의_카테고리는_카테고리당_2개이상_중복되지_않는다() {
+        RecommendedCategories recommendedCategories = categoryService.recommendCategories();
+
+        boolean hasDuplicationMoreThanTwice = false;
+        Map<Weekday, Category> categories = recommendedCategories.getCategories();
+        for (Weekday weekday : categories.keySet()) {
+            int duplicationCount = 0;
+            Category category = categories.get(weekday);
+            for (Weekday comparingWeekday : categories.keySet()) {
+                if (comparingWeekday.equals(weekday)) {
+                    continue;
+                }
+                if (categories.get(comparingWeekday).equals(category)) {
+                    duplicationCount++;
+                }
+            }
+            if (duplicationCount > 1) {
+                hasDuplicationMoreThanTwice = true;
+                break;
+            }
+        }
+        assertThat(hasDuplicationMoreThanTwice).isFalse();
+    }
+
+    @Test
+    void 한_코치의_메뉴는_중복되지_않는다() {
+        Coach poby = coachRepository.findByName("포비");
+        RecommendedCategories recommendedCategories = categoryService.recommendCategories();
+
+        menuService.recommendMenus(recommendedCategories);
+
+        List<Menu> uniqueMenus = new ArrayList<>();
+        Map<Weekday, Menu> menus = recommendationRepository.findAll().get(poby).getMenus();
+        for (Weekday weekday : menus.keySet()) {
+            uniqueMenus.add(menus.get(weekday));
+        }
+
+        assertThat(uniqueMenus.size()).isEqualTo(new HashSet<>(uniqueMenus).size());
     }
 
 }

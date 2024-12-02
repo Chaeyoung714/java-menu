@@ -25,4 +25,8 @@ public class RecommendedCategories {
     public Category findByWeekday(Weekday weekday) {
         return categories.get(weekday);
     }
+
+    public Map<Weekday, Category> getCategories() {
+        return categories;
+    }
 }
