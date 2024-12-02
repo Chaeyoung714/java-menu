@@ -6,8 +6,9 @@ import menu.exception.ErrorHandler;
 import menu.model.recommendation.Coach;
 import menu.model.recommendation.RecommendedCategories;
 import menu.model.recommendation.RecommendedMenus;
+import menu.service.CategoryService;
 import menu.service.CoachService;
-import menu.service.RecommendationService;
+import menu.service.MenuService;
 import menu.view.InputHandler;
 import menu.view.OutputView;
 
@@ -15,21 +16,23 @@ public class MenuController {
     private final InputHandler inputHandler;
     private final OutputView outputView;
     private final CoachService coachService;
-    private final RecommendationService recommendationService;
+    private final MenuService menuService;
+    private final CategoryService categoryService;
 
     public MenuController(InputHandler inputHandler, OutputView outputView, CoachService coachService,
-                          RecommendationService recommendationService) {
+                          MenuService menuService, CategoryService categoryService) {
         this.inputHandler = inputHandler;
         this.outputView = outputView;
         this.coachService = coachService;
-        this.recommendationService = recommendationService;
+        this.menuService = menuService;
+        this.categoryService = categoryService;
     }
 
     public void run() {
         List<Coach> coaches = registerCoaches();
         registerForbiddenMenuNames(coaches);
-        RecommendedCategories categories = recommendationService.recommendCategories();
-        Map<Coach, RecommendedMenus> recommendationResult = recommendationService.recommendMenus(categories);
+        RecommendedCategories categories = categoryService.recommendCategories();
+        Map<Coach, RecommendedMenus> recommendationResult = menuService.recommendMenus(categories);
         outputView.printRecommendationResult(categories, coaches, recommendationResult);
     }
 
@@ -55,6 +58,4 @@ public class MenuController {
             }
         }
     }
-
-
 }

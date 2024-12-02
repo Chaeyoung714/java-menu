@@ -8,27 +8,41 @@ import menu.model.recommendation.RecommendedCategories;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 import menu.repository.RecommendationRepository;
+import menu.service.CategoryService;
 import menu.service.CoachService;
-import menu.service.RecommendationService;
+import menu.service.MenuService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FunctionTest {
+    private final MenuRepository menuRepository = new MenuRepository();
+
+    private CoachRepository coachRepository;
+    private RecommendationRepository recommendationRepository;
+    private CoachService coachService;
+    private MenuService menuService;
+    private CategoryService categoryService;
+
+
+    @BeforeEach
+    void setUp() {
+        coachRepository = new CoachRepository();
+        recommendationRepository = new RecommendationRepository();
+        coachService = new CoachService(coachRepository, menuRepository);
+        menuService = new MenuService(coachRepository, menuRepository, recommendationRepository);
+        categoryService = new CategoryService();
+        coachService.registerCoaches(List.of(
+                "포비", "로로"
+        ));
+    }
 
     @Test
     void 메뉴_받아오기_테스트() {
-        MenuRepository menuRepository = new MenuRepository();
-
         assertThat(menuRepository.findAll().size()).isEqualTo(45);
     }
 
     @Test
     void 못먹는메뉴_저장_테스트() {
-        CoachRepository coachRepository = new CoachRepository();
-        MenuRepository menuRepository = new MenuRepository();
-        CoachService coachService = new CoachService(coachRepository, menuRepository);
-        coachService.registerCoaches(List.of(
-                "포비"
-        ));
         Coach poby = coachRepository.findByName("포비");
 
         coachService.registerForbiddenMenuName(poby, List.of("우동", "스시"));
@@ -39,20 +53,11 @@ public class FunctionTest {
 
     @Test
     void 메뉴_추천_테스트() {
-        CoachRepository coachRepository = new CoachRepository();
-        MenuRepository menuRepository = new MenuRepository();
-        RecommendationRepository recommendationRepository = new RecommendationRepository();
-        CoachService coachService = new CoachService(coachRepository, menuRepository);
-        RecommendationService recommendationService = new RecommendationService(coachRepository, menuRepository,
-                recommendationRepository);
-        coachService.registerCoaches(List.of(
-                "포비", "로로"
-        ));
-        RecommendedCategories recommendedCategories = recommendationService.recommendCategories();
         Coach poby = coachRepository.findByName("포비");
         Coach roro = coachRepository.findByName("로로");
+        RecommendedCategories recommendedCategories = categoryService.recommendCategories();
 
-        recommendationService.recommendMenus(recommendedCategories);
+        menuService.recommendMenus(recommendedCategories);
 
         assertThat(recommendationRepository.findAll().size()).isEqualTo(2);
         assertThat(recommendationRepository.findAll().get(poby).getMenus().size()).isEqualTo(5);

@@ -17,7 +17,6 @@ public class CoachService {
         this.menuRepository = menuRepository;
     }
 
-    //TODO : DTO로 반환하기
     public List<Coach> registerCoaches(List<String> coachesInput) {
         for (String name : coachesInput) {
             coachRepository.save(new Coach(name));

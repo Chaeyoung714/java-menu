@@ -5,8 +5,9 @@ import menu.controller.MenuController;
 import menu.repository.CoachRepository;
 import menu.repository.MenuRepository;
 import menu.repository.RecommendationRepository;
+import menu.service.CategoryService;
 import menu.service.CoachService;
-import menu.service.RecommendationService;
+import menu.service.MenuService;
 import menu.view.InputHandler;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -20,8 +21,8 @@ public class DependencyConfig {
         return new CoachService(coachRepository, menuRepository);
     }
 
-    private RecommendationService recommendationService() {
-        return new RecommendationService(coachRepository, menuRepository, recommendationRepository);
+    private MenuService recommendationService() {
+        return new MenuService(coachRepository, menuRepository, recommendationRepository);
     }
 
     public MenuController menuController() {
@@ -30,6 +31,7 @@ public class DependencyConfig {
                 , new OutputView()
                 , coachService()
                 , recommendationService()
+                , new CategoryService()
         );
     }
 }
