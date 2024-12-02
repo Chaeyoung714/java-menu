@@ -1,5 +1,6 @@
 package menu.model.coach;
 
+import java.util.Collections;
 import java.util.Map;
 import menu.model.lunch.Menu;
 import menu.model.lunch.Weekday;
@@ -12,6 +13,6 @@ public class RecommendedMenus {
     }
 
     public Map<Weekday, Menu> getMenus() {
-        return menus;
+        return Collections.unmodifiableMap(menus);
     }
 }

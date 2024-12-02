@@ -1,8 +1,11 @@
 package menu.controller;
 
 import java.util.List;
+import java.util.Map;
 import menu.model.coach.Coach;
 import menu.model.coach.RecommendedCategories;
+import menu.model.coach.RecommendedMenus;
+import menu.model.lunch.Weekday;
 import menu.service.CoachService;
 import menu.service.RecommendationService;
 import menu.view.InputHandler;
@@ -30,6 +33,7 @@ public class MenuController {
             coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
         }
         RecommendedCategories categories = recommendationService.recommendCategories();
-        recommendationService.recommendMenus(categories);
+        Map<Coach, RecommendedMenus> recommendationResult = recommendationService.recommendMenus(categories);
+        outputView.printRecommendationResult(categories, coaches, recommendationResult);
     }
 }

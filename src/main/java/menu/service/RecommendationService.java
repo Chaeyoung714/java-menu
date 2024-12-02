@@ -55,7 +55,8 @@ public class RecommendationService {
         }
     }
 
-    public void recommendMenus(RecommendedCategories recommendedCategories) {
+    //TODO: dto로 바꾸기
+    public Map<Coach, RecommendedMenus> recommendMenus(RecommendedCategories recommendedCategories) {
         for (Coach coach : coachRepository.findAll()) {
             Map<Weekday, Menu> recommendedMenus = new HashMap<>();
             for (Weekday weekday : Weekday.getAllInOrder()) {
@@ -64,6 +65,7 @@ public class RecommendationService {
             }
             recommendationRepository.save(coach, new RecommendedMenus(recommendedMenus));
         }
+        return recommendationRepository.findAll();
     }
 
     private void recommendMenuPerDayPerCoach(Weekday weekday, Coach coach, Map<Weekday, Menu> recommendedMenus,
