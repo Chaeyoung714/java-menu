@@ -11,6 +11,7 @@ public class InputHandler {
     }
 
     public List<String> inputNames() {
+        inputView.inputStartLine();
         while (true) {
             try {
                 return inputView.inputNames();
