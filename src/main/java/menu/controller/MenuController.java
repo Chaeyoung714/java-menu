@@ -1,6 +1,7 @@
 package menu.controller;
 
 import java.util.List;
+import menu.model.coach.Coach;
 import menu.service.CoachService;
 import menu.view.InputHandler;
 import menu.view.OutputView;
@@ -18,6 +19,11 @@ public class MenuController {
 
     public void run() {
         List<String> names = inputHandler.inputNames();
-        coachService.registerCoaches(names);
+        List<Coach> coaches = coachService.registerCoaches(names);
+        for (Coach coach : coaches) {
+            List<String> forbiddenMenuNames = inputHandler.inputForbiddenMenuNames(coach.getName());
+            coachService.registerForbiddenMenuName(coach, forbiddenMenuNames);
+        }
+
     }
 }

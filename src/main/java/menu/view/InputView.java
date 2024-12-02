@@ -11,4 +11,11 @@ public class InputView {
         //TODO : 검증로직 추가
         return List.of(answer.split(","));
     }
+
+    public List<String> inputForbiddenMenuNames(String coachName) {
+        System.out.println(System.lineSeparator() + String.format("%s(이)가 못 먹는 메뉴를 입력해 주세요.", coachName));
+        String answer = Console.readLine();
+        //TODO : 검증로직 추가
+        return List.of(answer.split(","));
+    }
 }

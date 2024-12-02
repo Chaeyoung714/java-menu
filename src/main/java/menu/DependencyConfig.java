@@ -14,7 +14,7 @@ public class DependencyConfig {
     private final CoachRepository coachRepository = new CoachRepository();
 
     private CoachService coachService() {
-        return new CoachService(coachRepository);
+        return new CoachService(coachRepository, menuRepository);
     }
 
     public MenuController menuController() {

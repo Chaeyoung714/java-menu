@@ -27,4 +27,11 @@ public class MenuRepository {
     public List<Menu> findAll() {
         return Collections.unmodifiableList(menus);
     }
+
+    public Menu findByName(String name) {
+        return menus.stream()
+                .filter(m -> m.getName().equals(name))
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
 }

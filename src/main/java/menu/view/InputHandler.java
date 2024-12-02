@@ -19,4 +19,14 @@ public class InputHandler {
             }
         }
     }
+
+    public List<String> inputForbiddenMenuNames(String coachName) {
+        while (true) {
+            try {
+                return inputView.inputForbiddenMenuNames(coachName);
+            } catch (IllegalArgumentException e) {
+                ErrorHandler.handleUserError(e);
+            }
+        }
+    }
 }
