@@ -21,4 +21,12 @@ public enum Weekday {
     public static List<Weekday> getInOrder() {
         return Arrays.stream(Weekday.values()).collect(Collectors.toList());
     }
+
+    public static List<String> getNamesInOrder() {
+        return Arrays.stream(Weekday.values()).map(w -> w.getName()).collect(Collectors.toList());
+    }
+
+    public String getName() {
+        return name;
+    }
 }

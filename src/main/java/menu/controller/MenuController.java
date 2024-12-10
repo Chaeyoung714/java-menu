@@ -23,7 +23,7 @@ public class MenuController {
     }
 
     public void run() {
-        outputView.printStartLine();
+        outputView.printServiceStartLine();
         List<String> coachNames = inputHandler.readCoachNames();
         coachService.registerCoachNames(coachNames);
         for (String coachName : coachNames) {
@@ -32,7 +32,7 @@ public class MenuController {
         }
         WeeklyCategories weeklyCategories = menuService.recommendCategory();
         WeeklyRecommendation weeklyRecommendation = menuService.recommendMenu(weeklyCategories);
-
+        outputView.printRecommendations(weeklyRecommendation, weeklyCategories);
 
     }
 }

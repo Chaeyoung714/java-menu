@@ -8,4 +8,12 @@ public class WeeklyMenus {
     public WeeklyMenus(Map<Weekday, Menu> menus) {
         this.menus = menus;
     }
+
+    public Menu findByWeekday(Weekday weekday) {
+        return menus.get(weekday);
+    }
+
+    public Map<Weekday, Menu> getMenus() {
+        return menus;
+    }
 }
