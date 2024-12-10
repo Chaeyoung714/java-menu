@@ -1,6 +1,7 @@
-package menu.model;
+package menu.model.recommendation;
 
 import java.util.Map;
+import menu.model.coach.Coach;
 
 public class WeeklyRecommendation {
     private final Map<Coach, WeeklyMenus> recommendations;

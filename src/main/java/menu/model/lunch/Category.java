@@ -1,4 +1,4 @@
-package menu.model;
+package menu.model.lunch;
 
 import java.util.Arrays;
 

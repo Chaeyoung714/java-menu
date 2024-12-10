@@ -2,8 +2,8 @@ package menu.controller;
 
 import java.util.List;
 import menu.exception.RetryHandler;
-import menu.model.WeeklyCategories;
-import menu.model.WeeklyRecommendation;
+import menu.model.recommendation.WeeklyCategories;
+import menu.model.recommendation.WeeklyRecommendation;
 import menu.service.CoachService;
 import menu.service.MenuService;
 import menu.view.InputHandler;

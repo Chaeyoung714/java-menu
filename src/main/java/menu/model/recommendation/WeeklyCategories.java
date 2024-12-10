@@ -1,7 +1,7 @@
-package menu.model;
+package menu.model.recommendation;
 
-import java.util.List;
 import java.util.Map;
+import menu.model.lunch.Category;
 
 public class WeeklyCategories {
     private final Map<Weekday, Category> categories;

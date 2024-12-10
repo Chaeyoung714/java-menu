@@ -1,4 +1,4 @@
-package menu.model;
+package menu.model.lunch;
 
 public class Menu {
     private final String name;

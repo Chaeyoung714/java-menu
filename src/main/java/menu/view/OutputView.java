@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import menu.model.Coach;
-import menu.model.Weekday;
-import menu.model.WeeklyCategories;
-import menu.model.WeeklyMenus;
-import menu.model.WeeklyRecommendation;
+import menu.model.coach.Coach;
+import menu.model.recommendation.Weekday;
+import menu.model.recommendation.WeeklyCategories;
+import menu.model.recommendation.WeeklyMenus;
+import menu.model.recommendation.WeeklyRecommendation;
 
 public class OutputView {
 

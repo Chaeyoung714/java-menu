@@ -1,6 +1,7 @@
-package menu.model;
+package menu.model.recommendation;
 
 import java.util.Map;
+import menu.model.lunch.Menu;
 
 public class WeeklyMenus {
     private final Map<Weekday, Menu> menus;

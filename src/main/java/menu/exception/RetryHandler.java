@@ -1,6 +1,9 @@
 package menu.exception;
 
 import java.util.function.Supplier;
+import menu.exception.customExceptions.DuplicatedCategoryException;
+import menu.exception.customExceptions.DuplicatedMenuException;
+import menu.exception.customExceptions.ForbiddenMenuException;
 
 public class RetryHandler {
 

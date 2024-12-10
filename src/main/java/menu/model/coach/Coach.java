@@ -1,6 +1,7 @@
-package menu.model;
+package menu.model.coach;
 
 import java.util.List;
+import menu.model.lunch.Menu;
 
 public class Coach {
     private final String name;

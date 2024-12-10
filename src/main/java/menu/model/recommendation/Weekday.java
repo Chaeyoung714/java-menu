@@ -1,4 +1,4 @@
-package menu.model;
+package menu.model.recommendation;
 
 import java.util.Arrays;
 import java.util.List;

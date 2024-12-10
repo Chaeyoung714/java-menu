@@ -14,7 +14,6 @@ public class InputHandler {
     }
 
     public List<String> readCoachNames() {
-        //TODO : 검증추가
         return RetryHandler.retryUntilSuccessAndReturn(() -> {
             String answer = inputView.readCoachNames();
             return parseInputValues(answer);
