@@ -1,0 +1,42 @@
+package menu.exception;
+
+import java.util.function.Supplier;
+import menu.exception.customExceptions.DuplicatedCategoryException;
+import menu.exception.customExceptions.DuplicatedMenuException;
+import menu.exception.customExceptions.ForbiddenMenuException;
+
+public class RetryHandler {
+
+    public static void retryUntilSuccess(Runnable task) {
+        while (true) {
+            try {
+                task.run();
+                return;
+            } catch (IllegalArgumentException e) {
+                ErrorHandler.handleUserError(e);
+            }
+        }
+    }
+
+    public static <T> T retryUntilSuccessAndReturn(Supplier<T> inputSupplier) {
+        while (true) {
+            try {
+                return inputSupplier.get();
+            } catch (IllegalArgumentException e) {
+                ErrorHandler.handleUserError(e);
+            }
+        }
+    }
+
+    public static <T> T retryRecommendationUntilSuccessAndReturn(Supplier<T> inputSupplier) {
+        while (true) {
+            try {
+                return inputSupplier.get();
+            } catch (DuplicatedMenuException | DuplicatedCategoryException | ForbiddenMenuException e) {
+            }
+        }
+    }
+
+    private RetryHandler() {
+    }
+}
