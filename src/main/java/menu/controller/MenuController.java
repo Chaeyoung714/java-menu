@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.List;
 import menu.model.WeeklyCategories;
+import menu.model.WeeklyRecommendation;
 import menu.service.CoachService;
 import menu.service.MenuService;
 import menu.view.InputHandler;
@@ -30,6 +31,8 @@ public class MenuController {
             coachService.registerCoaches(coachName, forbiddenMenuNames);
         }
         WeeklyCategories weeklyCategories = menuService.recommendCategory();
-        menuService.recommendMenu();
+        WeeklyRecommendation weeklyRecommendation = menuService.recommendMenu(weeklyCategories);
+
+
     }
 }

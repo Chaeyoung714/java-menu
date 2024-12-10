@@ -9,5 +9,9 @@ public class WeeklyCategories {
         this.categories = categories;
     }
 
+    public Category findByWeekday(Weekday weekday) {
+        return categories.get(weekday);
+    }
+
 
 }

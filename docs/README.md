@@ -37,9 +37,9 @@
 ## 3. 월~금요일의 카테고리를 추천한다.
 
 1. 월~금 각각의 카테고리를 추천한다.
-    - [ ]  추천할 카테고리는 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.pickNumberInRange()`에서 생성해 준 값을 이용하여 정해야 한다.
-    - [ ]  임의로 카테고리의 순서 또는 데이터를 변경하면 안 된다.
-    - [ ]  `Randoms.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
+    - [x]  추천할 카테고리는 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.pickNumberInRange()`에서 생성해 준 값을 이용하여 정해야 한다.
+    - [x]  임의로 카테고리의 순서 또는 데이터를 변경하면 안 된다.
+    - [x]  `Randoms.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
 - [ ]  이때, 아래와 같은 경우  다시 `Randoms.pickNumberInRange()`를 통해 임의의 값을 생성해서 추천할 카테고리를 정해야 한다.
     - [ ]  한 주에 중복된 카테고리가 2회를 초과하는 경우
 2. 추천된 카테고리를 저장한다.
@@ -48,11 +48,11 @@
 
 1. 월~금 별로 2~3을 반복한다.
 2. 각각의 코치의 점심 메뉴를 추천한다.
-    - [ ]  추천할 메뉴는 정해진 카테고리에 있는 메뉴를 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.shuffle()`을 통해 임의의 순서로 섞은 후, 첫 번째 값을 사용해야 한다.
-    - [ ]  카테고리에 포함되는 메뉴 목록을 `List<String>` 형태로 준비한다.
-    - [ ]  임의로 메뉴의 순서 또는 데이터를 변경하면 안 된다.
-    - [ ]  `Randoms.shuffle()` 메서드의 인자로 전달되는 메뉴 데이터는, 최초에 제공한 목록을 그대로 전달해야 한다.
-    - [ ]  코치에게 추천할 메뉴를 정할 때 이미 추천한 메뉴, 먹지 못하는 메뉴도 포함된 리스트를 전달해야 한다.
+    - [x]  추천할 메뉴는 정해진 카테고리에 있는 메뉴를 [`camp.nextstep.edu.missionutils`](https://github.com/woowacourse-projects/mission-utils)에서 제공하는 `Randoms.shuffle()`을 통해 임의의 순서로 섞은 후, 첫 번째 값을 사용해야 한다.
+    - [x]  카테고리에 포함되는 메뉴 목록을 `List<String>` 형태로 준비한다.
+    - [x]  임의로 메뉴의 순서 또는 데이터를 변경하면 안 된다.
+    - [x]  `Randoms.shuffle()` 메서드의 인자로 전달되는 메뉴 데이터는, 최초에 제공한 목록을 그대로 전달해야 한다.
+    - [x]  코치에게 추천할 메뉴를 정할 때 이미 추천한 메뉴, 먹지 못하는 메뉴도 포함된 리스트를 전달해야 한다.
 - [ ]  이때, 아래와 같은 경우 다시 섞은 후 첫 번째 값을 사용해야 한다.
     - [ ]  한 주에 중복되는 메뉴가 있을 경우
     - [ ]  해당 코치가 못 먹는 메뉴에 포함될 경우

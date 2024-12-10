@@ -42,4 +42,11 @@ public class MenuRepository {
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
+
+    public List<Menu> findByCategory(Category category) {
+        return menus.stream()
+                .filter(m -> m.getCategory().equals(category))
+                .collect(Collectors.toList());
+    }
+
 }
