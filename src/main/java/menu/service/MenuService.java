@@ -1,10 +1,15 @@
 package menu.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import menu.exception.DuplicatedCategoryException;
+import menu.exception.DuplicatedMenuException;
+import menu.exception.ForbiddenMenuException;
 import menu.model.Category;
 import menu.model.Coach;
 import menu.model.Menu;
@@ -27,10 +32,23 @@ public class MenuService {
     public WeeklyCategories recommendCategory() {
         Map<Weekday, Category> recommendedCategories = new HashMap<>();
         for (Weekday weekday : Weekday.getInOrder()) {
-            Category category = Category.findByOrdinal(Randoms.pickNumberInRange(1, 5));
+            Category category = pickRandomCategory(recommendedCategories);
             recommendedCategories.put(weekday, category);
         }
         return new WeeklyCategories(recommendedCategories);
+    }
+
+    private Category pickRandomCategory(Map<Weekday, Category> recommendedStatus) {
+        while (true) {
+            try {
+                Category randomCategory = Category.findByOrdinal(Randoms.pickNumberInRange(1, 5));
+                if (Collections.frequency(recommendedStatus.values(), randomCategory) == 2) {
+                    throw new DuplicatedCategoryException();
+                }
+                return randomCategory;
+            } catch (DuplicatedCategoryException e) {
+            }
+        }
     }
 
     public WeeklyRecommendation recommendMenu(WeeklyCategories weeklyCategories) {
@@ -42,11 +60,31 @@ public class MenuService {
                     .collect(Collectors.toList());
             for (Coach coach : coachRepository.findAll()) {
                 Map<Weekday, Menu> recommendStatusPerCoach = findRecommendStatusOfCoach(recommendStatus, coach);
-                Menu menu = menuRepository.findByName(Randoms.shuffle(targetMenuNames).get(0));
+                Menu menu = pickRandomMenu(targetMenuNames, recommendStatus, weekday, coach);
                 recommendStatusPerCoach.put(weekday, menu);
             }
         }
         return createResult(recommendStatus);
+    }
+
+    private Menu pickRandomMenu(List<String> targetMenuNames, Map<Coach, Map<Weekday, Menu>> recommendStatus, Weekday weekday, Coach coach) {
+        while (true) {
+            try {
+                Menu randomMenu = menuRepository.findByName(Randoms.shuffle(targetMenuNames).get(0));
+                List<Menu> recommendedMenusInSameWeek = recommendStatus.keySet().stream()
+                        .filter(c -> recommendStatus.get(c).containsKey(weekday))
+                        .map(c -> recommendStatus.get(c).get(weekday))
+                        .collect(Collectors.toList());
+                if (recommendedMenusInSameWeek.contains(randomMenu)) {
+                    throw new DuplicatedMenuException();
+                }
+                if (coach.containsForbiddenMenu(randomMenu)) {
+                    throw new ForbiddenMenuException();
+                }
+                return randomMenu;
+            } catch (DuplicatedMenuException | ForbiddenMenuException exception) {
+            }
+        }
     }
 
     private Map<Weekday, Menu> findRecommendStatusOfCoach(Map<Coach, Map<Weekday, Menu>> recommendStatus, Coach coach) {

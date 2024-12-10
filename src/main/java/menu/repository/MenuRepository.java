@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.Category;
 import menu.model.Menu;
-import menu.util.InfoScanner;
+import menu.util.MenuScanner;
 
 public class MenuRepository {
     private final List<Menu> menus;
@@ -26,7 +26,7 @@ public class MenuRepository {
     }
 
     private List<Menu> registerMenu(Category category, String menuInfo) {
-        List<String> parsedMenu = InfoScanner.readMenu(menuInfo);
+        List<String> parsedMenu = MenuScanner.readMenu(menuInfo);
         return parsedMenu.stream()
                 .map(p -> new Menu(p, category))
                 .collect(Collectors.toList());

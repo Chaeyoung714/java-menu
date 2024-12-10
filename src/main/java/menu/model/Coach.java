@@ -11,6 +11,10 @@ public class Coach {
         this.forbiddenMenus = forbiddenMenus;
     }
 
+    public boolean containsForbiddenMenu(Menu menu) {
+        return forbiddenMenus.contains(menu);
+    }
+
     public String getName() {
         return name;
     }
