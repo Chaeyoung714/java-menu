@@ -1,7 +1,9 @@
 package menu.controller;
 
 import java.util.List;
+import menu.model.WeeklyCategories;
 import menu.service.CoachService;
+import menu.service.MenuService;
 import menu.view.InputHandler;
 import menu.view.OutputView;
 
@@ -9,11 +11,14 @@ public class MenuController {
     private final InputHandler inputHandler;
     private final OutputView outputView;
     private final CoachService coachService;
+    private final MenuService menuService;
 
-    public MenuController(InputHandler inputHandler, OutputView outputView, CoachService coachService) {
+    public MenuController(InputHandler inputHandler, OutputView outputView, CoachService coachService,
+                          MenuService menuService) {
         this.inputHandler = inputHandler;
         this.outputView = outputView;
         this.coachService = coachService;
+        this.menuService = menuService;
     }
 
     public void run() {
@@ -24,7 +29,7 @@ public class MenuController {
             List<String> forbiddenMenuNames = inputHandler.readForbiddenMenusOf(coachName);
             coachService.registerCoaches(coachName, forbiddenMenuNames);
         }
-        coachService.print();
-
+        WeeklyCategories weeklyCategories = menuService.recommendCategory();
+        menuService.recommendMenu();
     }
 }

@@ -27,10 +27,4 @@ public class CoachService {
                 .collect(Collectors.toList());
         coachRepository.save(new Coach(coachName, forbiddenMenus));
     }
-
-    public void print() {
-        for (Coach coach : coachRepository.findAll()) {
-            System.out.println(coach.getName());
-        }
-    }
 }
