@@ -34,8 +34,7 @@ public class MenuController {
 
     private List<String> registerCoachNames() {
         return RetryHandler.retryUntilSuccessAndReturn(() -> {
-            List<String> coachNames = registerCoachNames();
-            inputHandler.readCoachNames();
+            List<String> coachNames = inputHandler.readCoachNames();
             coachService.registerCoachNames(coachNames);
             return coachNames;
         });
