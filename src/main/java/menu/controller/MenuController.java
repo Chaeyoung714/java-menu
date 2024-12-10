@@ -1,6 +1,7 @@
 package menu.controller;
 
 import java.util.List;
+import menu.exception.RetryHandler;
 import menu.model.WeeklyCategories;
 import menu.model.WeeklyRecommendation;
 import menu.service.CoachService;
@@ -24,15 +25,28 @@ public class MenuController {
 
     public void run() {
         outputView.printServiceStartLine();
-        List<String> coachNames = inputHandler.readCoachNames();
-        coachService.registerCoachNames(coachNames);
-        for (String coachName : coachNames) {
-            List<String> forbiddenMenuNames = inputHandler.readForbiddenMenusOf(coachName);
-            coachService.registerCoaches(coachName, forbiddenMenuNames);
-        }
+        List<String> coachNames = registerCoachNames();
+        registerForbiddenMenusOf(coachNames);
         WeeklyCategories weeklyCategories = menuService.recommendCategory();
         WeeklyRecommendation weeklyRecommendation = menuService.recommendMenu(weeklyCategories);
         outputView.printRecommendations(weeklyRecommendation, weeklyCategories);
+    }
 
+    private List<String> registerCoachNames() {
+        return RetryHandler.retryUntilSuccessAndReturn(() -> {
+            List<String> coachNames = registerCoachNames();
+            inputHandler.readCoachNames();
+            coachService.registerCoachNames(coachNames);
+            return coachNames;
+        });
+    }
+
+    private void registerForbiddenMenusOf(List<String> coachNames) {
+        for (String coachName : coachNames) {
+            RetryHandler.retryUntilSuccess(() -> {
+                List<String> forbiddenMenuNames = inputHandler.readForbiddenMenusOf(coachName);
+                coachService.registerCoaches(coachName, forbiddenMenuNames);
+            });
+        }
     }
 }

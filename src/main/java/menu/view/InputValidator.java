@@ -2,8 +2,8 @@ package menu.view;
 
 public class InputValidator {
 
-    public static void validateCoachName(String name) {
-        if (name == null || name.isBlank()) {
+    public static void validateInputValue(String value) {
+        if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("값을 입력해주세요.");
         }
     }
