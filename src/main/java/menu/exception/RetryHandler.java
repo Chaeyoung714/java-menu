@@ -25,6 +25,15 @@ public class RetryHandler {
         }
     }
 
+    public static <T> T retryRecommendationUntilSuccessAndReturn(Supplier<T> inputSupplier) {
+        while (true) {
+            try {
+                return inputSupplier.get();
+            } catch (DuplicatedMenuException | DuplicatedCategoryException | ForbiddenMenuException e) {
+            }
+        }
+    }
+
     private RetryHandler() {
     }
 }

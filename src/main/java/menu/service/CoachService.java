@@ -32,7 +32,6 @@ public class CoachService {
     }
 
     public void registerCoaches(String coachName, List<String> forbiddenMenuNames) {
-        //TODO : validate
         try {
             validateMenus(forbiddenMenuNames);
             List<Menu> forbiddenMenus = forbiddenMenuNames.stream()
