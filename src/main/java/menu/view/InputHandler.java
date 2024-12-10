@@ -8,11 +8,11 @@ public class InputHandler {
         this.inputView = inputView;
     }
 
-    public String read() {
-        return RetryHandler.retryUntilSuccessAndReturn(() -> {
-            String answer = inputView.read();
-            InputValidator.validate(answer);
-            return answer;
-        });
-    }
+//    public String read() {
+//        return RetryHandler.retryUntilSuccessAndReturn(() -> {
+//            String answer = inputView.read();
+//            InputValidator.validate(answer);
+//            return answer;
+//        });
+//    }
 }
