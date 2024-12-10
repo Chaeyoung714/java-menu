@@ -16,11 +16,18 @@ public class InputHandler {
         //TODO : 검증추가
         return RetryHandler.retryUntilSuccessAndReturn(() -> {
             String answer = inputView.readCoachNames();
-            return parseCoachNames(answer);
+            return parseInputValues(answer);
         });
     }
 
-    private List<String> parseCoachNames(String answer) {
+    public List<String> readForbiddenMenusOf(String coachName) {
+        return RetryHandler.retryUntilSuccessAndReturn(() -> {
+            String answer = inputView.readForbiddenMenus(coachName);
+            return parseInputValues(answer);
+        });
+    }
+
+    private List<String> parseInputValues(String answer) {
         String[] parsedAnswer = answer.split(",", -1);
         return Arrays.stream(parsedAnswer).map((p) -> {
             InputValidator.validateCoachName(p);

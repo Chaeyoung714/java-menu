@@ -1,6 +1,7 @@
 package menu.repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.Category;
@@ -29,5 +30,16 @@ public class MenuRepository {
         return parsedMenu.stream()
                 .map(p -> new Menu(p, category))
                 .collect(Collectors.toList());
+    }
+
+    public List<Menu> findAll() {
+        return Collections.unmodifiableList(menus);
+    }
+
+    public Menu findByName(String name) {
+        return menus.stream()
+                .filter(m -> m.getName().equals(name))
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
     }
 }
