@@ -1,5 +1,6 @@
 package menu.controller;
 
+import java.util.List;
 import menu.view.InputHandler;
 import menu.view.OutputView;
 
@@ -13,6 +14,8 @@ public class MenuController {
     }
 
     public void run() {
+        outputView.printStartLine();
+        List<String> coachNames = inputHandler.readCoachNames();
 
     }
 }
